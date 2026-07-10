@@ -3,11 +3,12 @@ html {
 }
 
 #display-flex-properties-row,
-#display-flex-properties-column {
+#display-flex-properties-column,
+#display-grid-properties-template {
   height: 400px;
 }
 
-.two-per-row {
+.flex {
   /* elements in one row (default nowrap) */
   display: flex;
   gap: 20px;

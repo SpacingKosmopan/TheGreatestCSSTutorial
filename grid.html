@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Greatest CSS Tutorial - Grid</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="table_style.css" />
+  </head>
+
+  <body>
+    <button id="backToTop" class="back-to-top" title="Back">↑</button>
+
+    <div id="learning-box">
+      <h1>
+        <button onclick="window.location.href = `./flex.html`">
+          ◀ prev: flex
+        </button>
+        display: grid;
+      </h1>
+      <h2>Parent properties (Container)</h2>
+      <div class="flex">
+        <img
+          src="./display_grid-template.png"
+          alt="display_grid_box"
+          id="display-grid-properties-template"
+        />
+        <table>
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th colspan="7">Value / Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>
+                <a href="#grid-template-columns-section"
+                  >grid-template-columns</a
+                >
+                <p>Number and width of columns</p>
+              </th>
+              <td colspan="2">
+                <b>px / % / rem</b>
+                <p>Fixed sizes <br />(e.g., 100px 200px)</p>
+              </td>
+              <td colspan="2">
+                <b>fr (fraction)</b>
+                <p>Flexible free space <br />(e.g., 1fr 2fr ➡ 1/3 & 2/3)</p>
+              </td>
+              <td colspan="2">
+                <b>repeat(count, size)</b>
+                <p>
+                  Shortcut<br />
+                  (e.g., repeat(3, 1fr) = 1fr 1fr 1fr)
+                </p>
+              </td>
+            </tr>
+
+            <tr>
+              <th>
+                <a href="#grid-template-rows-section">grid-template-rows</a>
+                <p>Number and height of rows</p>
+              </th>
+              <td colspan="2">
+                <b>px / % / rem</b>
+                <p>Fixed row heights</p>
+              </td>
+              <td colspan="2">
+                <b>fr</b>
+                <p>Fractional row heights</p>
+              </td>
+              <td colspan="2">
+                <b>auto</b>
+                <p>Sizes to fit content</p>
+              </td>
+            </tr>
+
+            <tr>
+              <th><a href="#grid-auto-flow-section">grid-auto-flow</a></th>
+              <td colspan="2">
+                <b>row (def)</b>
+                <p>Fills by row ➡</p>
+              </td>
+              <td colspan="2">
+                <b>column</b>
+                <p>Fills by col ⬇</p>
+              </td>
+              <td colspan="2">
+                <b>dense [checkbox]</b>
+                <p>Fills out empty gaps in grid later</p>
+              </td>
+            </tr>
+
+            <tr>
+              <th>
+                <a href="#align-content-section">align-content</a>
+                <p>Moves the whole grid vertical</p>
+              </th>
+              <td><b>normal (def)</b></td>
+              <td><b>start</b></td>
+              <td><b>end</b></td>
+              <td><b>center</b></td>
+              <td><b>space-between</b></td>
+              <td><b>space-around</b></td>
+              <td><b>space-evenly</b> / stretch</td>
+            </tr>
+
+            <tr>
+              <th>
+                <a href="#justify-content-section">justify-content</a>
+                <p>Moves the whole grid horizontal</p>
+              </th>
+              <td><b>normal (def)</b></td>
+              <td><b>start</b></td>
+              <td><b>end</b></td>
+              <td><b>center</b></td>
+              <td><b>space-between</b></td>
+              <td><b>space-around</b></td>
+              <td><b>space-evenly</b> / stretch</td>
+            </tr>
+
+            <tr>
+              <th>
+                <a href="#align-items-section">align-items</a>
+                <p>Content alignement in one cell vertical (like text)</p>
+              </th>
+              <td><b>normal / stretch</b></td>
+              <td><b>start</b></td>
+              <td><b>end</b></td>
+              <td><b>center</b></td>
+              <td><b>baseline (A)</b></td>
+            </tr>
+
+            <tr>
+              <th>
+                <a href="#justify-items-section">justify-items</a>
+                <p>Content alignement in one cell horizontal</p>
+              </th>
+              <td><b>normal / stretch</b></td>
+              <td><b>start</b></td>
+              <td><b>end</b></td>
+              <td><b>center</b></td>
+            </tr>
+
+            <tr>
+              <th><a href="#gaps-section">gaps</a></th>
+              <td>
+                <b>gap</b>
+                <p>Both directions</p>
+              </td>
+              <td>
+                <b>row-gap</b>
+                <p>Space between rows</p>
+              </td>
+              <td>
+                <b>column-gap</b>
+                <p>Space between columns</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Child properties (Items)</h2>
+      <div class="two-per-row">
+        <table>
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th colspan="2">Value / Syntax</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><a href="#grid-column-section">grid-column</a></th>
+              <td>
+                <b>grid-column-start / end</b>
+                <p>Number of line (e.g. 1 / 3)</p>
+              </td>
+              <td>
+                <b>span X</b>
+                <p>Takes X columns (e.g. span 2)</p>
+              </td>
+            </tr>
+            <tr>
+              <th><a href="#grid-row-section">grid-row</a></th>
+              <td>
+                <b>grid-row-start / end</b>
+                <p>Number of line (e.g. 2 / 4)</p>
+              </td>
+              <td>
+                <b>span X</b>
+                <p>Takes X rows (e.g. span 3)</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="previews">
+        <div id="grid-template-columns-section" class="property-box">
+          <h2>grid-template-columns</h2>
+
+          <div
+            style="display: grid; grid-template-columns: 100px 200px 100px"
+            class="common-container"
+          >
+            <h3>100px 200px 100px</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+          </div>
+
+          <div
+            style="display: grid; grid-template-columns: 1fr 2fr 1fr"
+            class="common-container"
+          >
+            <h3>1fr 2fr 1fr</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+          </div>
+
+          <div
+            style="display: grid; grid-template-columns: repeat(3, 1fr)"
+            class="common-container"
+          >
+            <h3>repeat(3, 1fr)</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+          </div>
+        </div>
+
+        <!-- JUSTIFY ITEMS -->
+        <div id="justify-items-section" class="property-box">
+          <h2>justify-items (horizontal inside cell)</h2>
+
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              justify-items: stretch;
+            "
+            class="common-container"
+          >
+            <h3>stretch</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+          </div>
+
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              justify-items: start;
+            "
+            class="common-container"
+          >
+            <h3>start</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+          </div>
+
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              justify-items: end;
+            "
+            class="common-container"
+          >
+            <h3>end</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+          </div>
+
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              justify-items: center;
+            "
+            class="common-container"
+          >
+            <h3>center</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+          </div>
+        </div>
+
+        <!-- GAPS -->
+        <div id="gaps-section" class="property-box">
+          <h2>gaps</h2>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 20px;
+            "
+            class="common-container"
+          >
+            <h3>gap: 20px</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+        </div>
+
+        <!-- CHILD PROPERTIES: GRID-COLUMN -->
+        <div id="grid-column-section" class="property-box">
+          <h2>Child: grid-column</h2>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 10px;
+            "
+            class="common-container"
+          >
+            <h3>Item 1 has grid-column: span 2</h3>
+            <div
+              class="common-container-child"
+              style="grid-column: span 2; background-color: #ff5722"
+            >
+              1 (span 2)
+            </div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
