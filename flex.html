@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Greatest CSS Tutorial</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="table_style.css" />
+  </head>
+
+  <body>
+    <button id="backToTop" class="back-to-top" title="Back">↑</button>
+
+    <div id="learning-box">
+      <h1>
+        display: flex;<button onclick="window.location.href = `./flex.html`">
+          ▶ next: grid
+        </button>
+      </h1>
+      <h2>Parent properties</h2>
+      <div class="two-per-row">
+        <img
+          src="./display_flex-row.png"
+          alt="display_flex_box"
+          id="display-flex-properties-row"
+        /><img
+          src="./display_flex-column.png"
+          alt="display_flex_box"
+          id="display-flex-properties-column"
+        />
+        <table>
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th colspan="6">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><a href="#flex-direction-section">flex-direction</a></th>
+              <td>
+                <b>row (def)</b>
+                <p>left➡right</p>
+              </td>
+              <td>
+                <b>column</b>
+                <p>up⬇down</p>
+              </td>
+              <td>
+                <b>row-reverse</b>
+                <p>right⬅left</p>
+              </td>
+              <td>
+                <b>column-reverse</b>
+                <p>down⬆up</p>
+              </td>
+            </tr>
+
+            <tr>
+              <th><a href="#flex-wrap-section">flex-wrap</a></th>
+              <td>
+                <b>nowrap (def)</b>
+                <p>all elements in one row</p>
+              </td>
+              <td>
+                <b>wrap </b>
+                <p>elements go to new row down if there is no space</p>
+              </td>
+              <td>
+                <b>rap-reverse </b>
+                <p>elements go to new row up if there is no space</p>
+              </td>
+            </tr>
+
+            <tr>
+              <th>
+                <a href="#align-content-section">align-content</a>
+                <p>only when `flex-wrap:wrap` | rows position</p>
+              </th>
+              <td>
+                <b>center</b>
+                <p></p>
+              </td>
+              <td>
+                <b>flex-start</b>
+                <p></p>
+              </td>
+              <td>
+                <b>flex-end</b>
+                <p></p>
+              </td>
+              <td>
+                <b>space-around</b>
+                <p></p>
+              </td>
+              <td>
+                <b>space-between</b>
+                <p></p>
+              </td>
+              <td>
+                <b>stretch</b>
+                <p></p>
+              </td>
+            </tr>
+
+            <tr>
+              <th>
+                <a href="#justify-content-section">justify-content</a>
+                <p>main axis</p>
+              </th>
+              <td>
+                <b>center</b>
+                <p></p>
+              </td>
+              <td>
+                <b>flex-start</b>
+                <p>
+                  ⬅ in row<br />
+                  ⬆ in column
+                </p>
+              </td>
+              <td>
+                <b>flex-end</b>
+                <p></p>
+              </td>
+              <td>
+                <b>space-between</b>
+                <p>first and last right next to border</p>
+              </td>
+              <td>
+                <b>space-around</b>
+                <p>space between border 1x, space between elements 2x</p>
+              </td>
+              <td>
+                <b>space-evenly</b>
+                <p>space around everything (elements and boders) is the same</p>
+              </td>
+            </tr>
+
+            <tr>
+              <th>
+                <a href="#align-items-section">align-items</a>
+                <p>cross axis | items position in row/column</p>
+              </th>
+              <td>
+                <b>center</b>
+                <p></p>
+              </td>
+              <td>
+                <b>flex-start</b>
+                <p>
+                  ⬆ in row<br />
+                  ⬅ in column
+                </p>
+              </td>
+              <td>
+                <b>flex-end</b>
+                <p></p>
+              </td>
+              <td>
+                <b>stretch</b>
+                <p>stretches to 100% container width</p>
+              </td>
+              <td>
+                <b>baseline</b>
+                <p>text baseline</p>
+              </td>
+            </tr>
+
+            <tr>
+              <th>
+                <a href="#align-content-section">gaps</a>
+                <p></p>
+              </th>
+              <td>
+                <b>gap</b>
+              </td>
+              <td>
+                <b>row-gap</b>
+              </td>
+              <td>
+                <b>column-gap</b>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="previews">
+        <div id="flex-direction-section" class="property-box">
+          <h2>flex-direction</h2>
+
+          <div
+            style="display: flex; flex-direction: row"
+            class="common-container"
+          >
+            <h3>row</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; flex-direction: column"
+            class="common-container"
+          >
+            <h3>column</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; flex-direction: row-reverse"
+            class="common-container"
+          >
+            <h3>row-reverse</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; flex-direction: column-reverse"
+            class="common-container"
+          >
+            <h3>column-reverse</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+        </div>
+
+        <div id="flex-wrap-section" class="property-box">
+          <h2>flex-wrap (rows creation)</h2>
+          <div style="display: flex; flex-wrap: wrap" class="common-container">
+            <h3>wrap</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; flex-wrap: nowrap"
+            class="common-container"
+          >
+            <h3>nowrap</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; flex-wrap: wrap-reverse"
+            class="common-container"
+          >
+            <h3>wrap-reverse</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+        </div>
+
+        <div id="align-content-section" class="property-box">
+          <h2>align-content (rows position)</h2>
+
+          <div
+            style="display: flex; flex-wrap: wrap; align-content: center"
+            class="common-container"
+          >
+            <h3>center</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; flex-wrap: wrap; align-content: flex-start"
+            class="common-container"
+          >
+            <h3>flex-start (flex wrap)</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; flex-wrap: wrap; align-content: flex-end"
+            class="common-container"
+          >
+            <h3>flex-end</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; flex-wrap: wrap; align-content: space-around"
+            class="common-container"
+          >
+            <h3>space-around</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; flex-wrap: wrap; align-content: space-between"
+            class="common-container"
+          >
+            <h3>space-between</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; flex-wrap: wrap; align-content: stretch"
+            class="common-container"
+          >
+            <h3>stretch</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+        </div>
+
+        <div id="justify-content-section" class="property-box">
+          <h2>justify-content (main axis)</h2>
+
+          <div
+            style="display: flex; justify-content: center"
+            class="common-container"
+          >
+            <h3>center</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; justify-content: flex-start"
+            class="common-container"
+          >
+            <h3>flex-start</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; justify-content: flex-end"
+            class="common-container"
+          >
+            <h3>flex-end</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; justify-content: space-between"
+            class="common-container"
+          >
+            <h3>space-between</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; justify-content: space-around"
+            class="common-container"
+          >
+            <h3>space-around</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; justify-content: space-evenly"
+            class="common-container"
+          >
+            <h3>space-evenly</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+        </div>
+
+        <div id="align-items-section" class="property-box">
+          <h2>align-items (cross axis)</h2>
+
+          <div
+            style="display: flex; align-items: center"
+            class="common-container"
+          >
+            <h3>center</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; align-items: flex-start"
+            class="common-container"
+          >
+            <h3>flex-start</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; align-items: flex-end"
+            class="common-container"
+          >
+            <h3>flex-end</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; align-items: stretch"
+            class="common-container"
+          >
+            <h3>stretch</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+
+          <div
+            style="display: flex; align-items: baseline"
+            class="common-container"
+          >
+            <h3>baseline</h3>
+            <div class="common-container-child">1</div>
+            <div class="common-container-child">2</div>
+            <div class="common-container-child">3</div>
+            <div class="common-container-child">4</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const backToTopBtn = document.getElementById("backToTop");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.add("show");
+        } else {
+          backToTopBtn.classList.remove("show");
+        }
+      });
+
+      backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+    </script>
+  </body>
+</html>
