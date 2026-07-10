@@ -13,13 +13,265 @@
 
     <div id="learning-box">
       <h1>
-        <button onclick="window.location.href = `./index.html`">◀ home</button>
-        SVG
+        <button onclick="window.location.href = `./index.html`">◀ home</button
+        >SVG (Scalable Vector Graphics)
       </h1>
-      <div id="info-box">
-        <p>Element in text</p>
-        <p>Usage: buttons, tiles</p>
-        <p>You can set its height, width and top and bottom margins</p>
+      <div id="code-info-box">
+        <p>
+          is an XML-based vector image format used directly inside HTML. Unlike
+          regular images (JPG, PNG), SVG never loses quality when zoomed in and
+          maintains an incredibly small file size.
+        </p>
+        <h2>The Main Container</h2>
+        <p>
+          Every SVG graphic must be wrapped inside the root < svg > tag. Its key
+          attributes control how the image scales:<br /><strong
+            >width / height</strong
+          >: Sets the physical display size on the web page.
+        </p>
+
+        <h2>Basic Shape Tags and Applications</h2>
+        <p>These structural elements build your visual components:</p>
+        <ul>
+          <li>
+            <code>&lt;rect&gt;</code> (Rectangle): Draws squares and rectangles.
+            Can have rounded corners. <br />Syntax:
+            <code
+              >&lt;rect x="X_COORD" y="Y_COORD" width="WIDTH" height="HEIGHT"
+              rx="RADIUS_X" ry="RADIUS_Y" /&gt;</code
+            >
+          </li>
+          <li>
+            <code>&lt;circle&gt;</code> (Circle): Renders perfect circles using
+            a center point and a radius. <br />Syntax:
+            <code>&lt;circle cx="CENTER_X" cy="CENTER_Y" r="RADIUS" /&gt;</code>
+          </li>
+          <li>
+            <code>&lt;ellipse&gt;</code> (Ellipse): Renders oval shapes using
+            distinct horizontal and vertical radii. <br />Syntax:
+            <code
+              >&lt;ellipse cx="CENTER_X" cy="CENTER_Y" rx="RADIUS_X"
+              ry="RADIUS_Y" /&gt;</code
+            >
+          </li>
+          <li>
+            <code>&lt;line&gt;</code> (Line): Connects two distinct coordinate
+            points with a straight line. <br />Syntax:
+            <code
+              >&lt;line x1="START_X" y1="START_Y" x2="END_X" y2="END_Y"
+              stroke="COLOR" /&gt;</code
+            >
+          </li>
+          <li>
+            <code>&lt;polyline&gt;</code> (Polyline): Connects a series of
+            straight lines together (ideal for open shapes like charts).
+            <br />Syntax:
+            <code
+              >&lt;polyline points="X1,Y1 X2,Y2 X3,Y3" fill="none"
+              stroke="COLOR" /&gt;</code
+            >
+          </li>
+          <li>
+            <code>&lt;polygon&gt;</code> (Polygon): Connects a series of points
+            and automatically closes the shape (ideal for triangles and stars).
+            <br />Syntax:
+            <code>&lt;polygon points="X1,Y1 X2,Y2 X3,Y3" /&gt;</code>
+          </li>
+          <li>
+            <code>&lt;path&gt;</code> (Path): The ultimate freestyle drawing
+            tool. Uses specialized text commands to draw complex, organic curves
+            and custom shapes. <br />Syntax:
+            <code>&lt;path d="M X Y L X Y C X1 Y1, X2 Y2, X Y Z" /&gt;</code>
+          </li>
+          <li>
+            <code>&lt;text&gt;</code> (Text): Renders searchable, selectable,
+            and SEO-friendly typography directly inside the graphic.
+            <br />Syntax:
+            <code
+              >&lt;text x="START_X" y="BASELINE_Y"&gt;Your Text
+              Here&lt;/text&gt;</code
+            >
+          </li>
+        </ul>
+
+        <h2>Drawing commands</h2>
+        <h3><code>M / m</code> - Move to (Lift and Place the Pen)</h3>
+        <p>
+          This command lifts the pen off the digital paper and moves it to a new
+          starting point. It does not draw anything. Every path must start with
+          an M command.<br />Syntax: <code>M x y</code> (Absolute) or
+          <code>m dx dy</code> (Relative)
+        </p>
+        <h3><code>L / l</code> - Line to (Draw a Straight Line)</h3>
+        <p>
+          This command draws a straight line from the pen's current position to
+          the new target position.<br />Syntax: <code>L x y</code> (Absolute) or
+          <code>l dx dy</code>
+          (Relative)
+        </p>
+        <h3><code>Z / z</code> - Close Path (Return Home)</h3>
+        <p>
+          This command snaps a straight line from your current position back to
+          the very first point of the current sub-path (where you last used the
+          M command).<br />
+          Syntax: <code>Z or z</code> (Case does not matter; it takes no
+          coordinate numbers)<br />Example:
+          <code>M 10 80 L 50 20 L 90 80 Z</code><br />What it does: It draws a
+          line from (10,80) to (50,20), then down to (90,80). Finally, Z
+          automatically draws a line from (90,80) back to the start at (10,80),
+          perfectly closing a triangle.
+        </p>
+        <h3><code>C / c</code> - Cubic Bézier Curve (Smooth Curves)</h3>
+        <p>
+          This is the most powerful command. It draws a curved line using two
+          external control points that pull the line like virtual magnets,
+          creating organic shapes.<br />Syntax: <code>C x1 y1, x2 y2, x y</code>
+        </p>
+        <ul>
+          <li>
+            <strong>x1 y1</strong>: Control point 1 (controls the curve's
+            direction leaving the start point)
+          </li>
+          <li>
+            <strong>x2 y2</strong>: Control point 2 (controls the curve's
+            direction entering the end point)
+          </li>
+          <li>
+            <strong>x y</strong>: The final destination where the line actually
+            ends
+          </li>
+        </ul>
+
+        <h2>Implementation example</h2>
+        <h3>Geometric shapes</h3>
+        <svg
+          width="200"
+          height="200"
+          viewBox="0 0 200 200"
+          style="border: 1px solid #ccc; margin-left: 50px"
+        >
+          <rect x="10" y="10" width="80" height="50" rx="5" fill="crimson" />
+
+          <circle cx="150" cy="40" r="30" fill="dodgerblue" />
+
+          <ellipse cx="60" cy="130" rx="40" ry="20" fill="gold" />
+
+          <line
+            x1="120"
+            y1="100"
+            x2="180"
+            y2="150"
+            stroke="black"
+            stroke-width="3"
+          />
+        </svg>
+        <pre><code>&lt;svg
+  width="200"
+  height="200"
+  viewBox="0 0 200 200"
+  style="border: 1px solid #ccc"
+&gt;
+  &lt;rect x="10" y="10" width="80" height="50" rx="5" fill="crimson" /&gt;
+
+  &lt;circle cx="150" cy="40" r="30" fill="dodgerblue" /&gt;
+
+  &lt;ellipse cx="60" cy="130" rx="40" ry="20" fill="gold" /&gt;
+
+  &lt;line
+    x1="120"
+    y1="100"
+    x2="180"
+    y2="150"
+    stroke="black"
+    stroke-width="3"
+  /&gt;
+&lt;/&svg&gt;</code></pre>
+
+        <h3>Multi-points forms</h3>
+        <svg
+          width="200"
+          height="100"
+          viewBox="0 0 200 100"
+          style="margin-left: 50px"
+        >
+          <polygon points="50,15 90,85 10,85" fill="limegreen" />
+
+          <polyline
+            points="120,85 140,15 160,85 180,15"
+            fill="none"
+            stroke="purple"
+            stroke-width="4"
+          />
+        </svg>
+        <pre><code>&lt;svg
+  width="200"
+  height="100"
+  viewBox="0 0 200 100"
+&gt;
+  &lt;polygon points="50,15 90,85 10,85" fill="limegreen" /&gt;
+
+  &lt;polyline
+    points="120,85 140,15 160,85 180,15"
+    fill="none"
+    stroke="purple"
+    stroke-width="4"
+  /&gt;
+&lt;/svg&gt;</code></pre>
+
+        <h3>Custom vector</h3>
+        <svg
+          width="200"
+          height="100"
+          viewBox="0 0 200 100"
+          style="margin-left: 50px"
+        >
+          <path d="M 10 80 L 50 20 L 90 80 Z" fill="orange" />
+
+          <path
+            d="M 110 50 C 130 10, 160 90, 190 50"
+            fill="none"
+            stroke="teal"
+            stroke-width="4"
+          />
+        </svg>
+        <pre><code>&lt;svg
+  width="200"
+  height="100"
+  viewBox="0 0 200 100"
+  style="margin-left: 50px"
+&gt;
+  &lt;path d="M 10 80 L 50 20 L 90 80 Z" fill="orange" /&gt;
+
+  &lt;path
+    d="M 110 50 C 130 10, 160 90, 190 50"
+    fill="none"
+    stroke="teal"
+    stroke-width="4"
+  /&gt;
+&lt;/svg&gt;</code></pre>
+
+        <h2>Styling and interaction</h2>
+        <svg width="200" height="100" style="margin-left: 50px">
+          <circle cx="50" cy="50" r="40" class="interactive-ball" />
+          <text x="100" y="55">Hover me!</text>
+        </svg>
+        <pre><code>&lt;style&gt;
+  .interactive-ball {
+    fill: lightcoral;
+    stroke: darkred;
+    stroke-width: 5px;
+    transition: fill 0.3s, transform 0.3s;
+  }
+  .interactive-ball:hover {
+    fill: darkred;
+    cursor: pointer;
+  }
+&lt;/style&gt;
+
+&lt;svg width="200" height="100" style="margin-left: 50px"&gt;
+  &lt;circle cx="50" cy="50" r="40" class="interactive-ball" /&gt;
+  &lt;text x="100" y="55">Hover me!&lt;/text&gt;
+&lt;/svg&gt;</code></pre>
       </div>
     </div>
     <script>
