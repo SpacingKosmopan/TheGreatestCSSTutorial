@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Greatest CSS Tutorial - Grid</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="table_style.css" />
+  </head>
+
+  <body>
+    <button id="backToTop" class="back-to-top" title="Back">↑</button>
+
+    <div id="learning-box">
+      <h1>
+        <button onclick="window.location.href = `./index.html`">◀ home</button>
+        CSS shapes
+      </h1>
+      <div id="code-info-box">
+        <h2>Clip Path</h2>
+        <p>
+          Cuts away parts of an element (like an image, text, or background).
+          Everything outside the path becomes fully transparent and
+          non-clickable.
+        </p>
+
+        <h2>Basic Functions of clip-path</h2>
+        <p>
+          The clip-path property accepts several built-in shape functions:<br />
+          <code>inset()</code> - Creates a rectangular cutout (like internal
+          margins).<br /><code>circle()</code> - Defines a perfect circle using
+          a radius and a center point.<br /><code>ellipse()</code> - Defines an
+          oval shape using two radii and a center point.<br /><code
+            >polygon()</code
+          >
+          - Connects custom coordinate points with straight lines. This is the
+          function used in your code.<br /><code>path()</code> - Imports complex
+          SVG path data for organic curves and shapes.
+        </p>
+
+        <h3>How <code>polygon()</code> Works</h3>
+        <p>
+          The polygon() function takes pairs of coordinates separated by commas:
+          polygon(X1 Y1, X2 Y2, X3 Y3, ...).<br />Points are usually defined in
+          percentages (%) or pixels (px).<br />
+        </p>
+        <img src="./polygon.png" alt="polygon" class="example-img" /><br />
+        <p>
+          The coordinate 0% 0% represents the top-left corner of the element.<br />The
+          coordinate 100% 100% represents the bottom-right corner of the
+          element.<br />You can use negative percentages (e.g., -50%) or numbers
+          greater than 100% (e.g., 150%) to pull points outside the physical
+          boundaries of the HTML element.
+        </p>
+
+        <h3><code>inset() - The Rectangular Box Cutout</code></h3>
+        <p>
+          The inset() function defines a rectangular clipping area by shrinking
+          the boundaries inward from the element's edges. It behaves exactly
+          like the CSS margin or padding shorthand.
+        </p>
+        <img src="./inset.png" alt="inset" class="example-img" />
+        <p>
+          Syntax:
+          <code>inset(top right bottom left [round border-radius])</code
+          ><br />Example:
+          <code>clip-path: inset(10px 20px 10px 20px round 5px);</code>
+        </p>
+        <ul>
+          <li>Cuts 10px from the top and bottom.</li>
+          <li>Cuts 20px from the left and right.</li>
+          <li>Rounds the resulting clipped corners with a 5px radius.</li>
+        </ul>
+
+        <h3><code>circle()</code> - The Perfect Circular Mask</h3>
+        <p>
+          The circle() function clips the element into a perfect circle based on
+          a radius and a specific positioning center point.
+        </p>
+        <img src="./circle.png" alt="circle" class="example-img" />
+        <p>
+          Syntax:
+          <code>circle(radius at X-coordinate Y-coordinate)</code><br />Values:
+        </p>
+        <ul>
+          <li>
+            Radius: Can be a length (e.g., 50px), a percentage (e.g., 25%), or
+            keywords like closest-side or farthest-side.
+          </li>
+          <li>
+            Position: Uses the at keyword followed by coordinates (e.g., at 50%
+            50% for the absolute center, or at top left).
+          </li>
+        </ul>
+        <p>
+          Example: <code>clip-path: circle(40% at 50% 50%);</code><br />Creates
+          a circle with a radius equal to 40% of the element's width/height,
+          positioned exactly in the dead center.
+        </p>
+
+        <h3><code>ellipse()</code> - The Oval Mask</h3>
+        <p>
+          The ellipse() function works identically to circle(), but it requires
+          two radii: one for the horizontal axis (X) and one for the vertical
+          axis (Y).<br />
+        </p>
+        <img src="./ellipse.png" alt="ellipse" class="example-img" />
+        <p>
+          Syntax:
+          <code>ellipse(radius-X radius-Y at X-coordinate Y-coordinate)</code
+          ><br />Example: <code>clip-path: ellipse(50% 30% at 50% 50%);</code
+          ><br />Creates a wide oval that spans 50% horizontally and 30%
+          vertically from the center.
+        </p>
+
+        <h3><code>path()</code> — The SVG Powerhouse</h3>
+        <p>
+          The path() function accepts a standard SVG path string literal. This
+          is the most powerful clip-path option because it allows you to use
+          complex vector math, including smooth Bezier curves and arcs , which
+          polygon() cannot do.
+        </p>
+        <img src="./path.png" alt="path" class="example-img" />
+        <p>
+          Syntax: <code>path('SVG-command-string')</code><br />Commands: Uses
+          standard SVG data syntax like
+        </p>
+        <ul>
+          <li>M (Move to),</li>
+          <li>L (Line to),</li>
+          <li>C (Cubic Bezier curve),</li>
+          <li>and Z (Close path)</li>
+        </ul>
+        <p>
+          Example:
+          <code>clip-path: path('M 10 80 C 40 10, 60 10, 90 80 Z');</code
+          ><br />Draws a smooth, curved wave mask directly onto the element.<br /><strong
+            >Note</strong
+          >: The coordinates inside path() are strictly absolute pixel values
+          and do not natively scale with percentages unless paired with
+          SVG-defined clip paths. <br /><strong>Note</strong>: Commas are
+          optional. <br /><strong>Note</strong>: Remember to finish the shape
+          with (Z) after "lifting the pen" with (M)<br />
+          external: <code>< path d="M 0,0 L 1,0 L 0.5,1 Z" / ></code> 0 = 0%, 1
+          = 100%<br />
+          internal: <code>path('M 10 80 C 40 10, 60 10, 90 80 Z')</code> 0 =
+          0px. 100 = 100px
+        </p>
+
+        <h2>Coloring / Bordering</h2>
+        <p>
+          <code>clip-path</code> just cuts out what you don't need. If you want
+          to set the color of shape, you need to use
+          <code>background-color</code>. If you want to put picture, you need to
+          use <code>background-image</code> etc. <br />Those shapes don't have
+          their own border. If you want to add border, you need to write a
+          little bit harder code. You cannot use simple
+          <code>border: ;</code> or shadows. They are going to be just cut out.
+          <br />Here are a couple of ways to add borders to your shapes:
+        </p>
+
+        <h3>Pseudo-Element layering</h3>
+        <div class="clipped-card"></div>
+        <pre><code>.clipped-card {
+  position: relative; <span class="code-comment">/* Makes the background sit on top */</span>
+  width: 100px;
+  height: 100px;
+  background: #2563eb; <span class="code-comment">/* Border Color */</span>
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); <span class="code-comment">/* Pentagon */</span>
+}
+
+.clipped-card::before {
+  content: "";
+  position: absolute;
+  inset: 5px;  <span class="code-comment">/* Border thickness */</span>
+  background: #898989; <span class="code-comment">/* Inner Content Color */</span>
+  <span class="code-comment">/* Path must match exactly */</span>
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+}</code></pre>
+
+        <h3>Drop shadow filter</h3>
+        <div class="shadow-wrapper">
+          <div class="drop-shadow-example"></div>
+        </div>
+        <pre><code><span class="code-comment">/* Parent */</span>
+.shadow-wrapper {
+  filter: drop-shadow(0px 0px 4px red);
+  height: 100px;
+  width: 100px;
+}
+
+<span class="code-comment">/* Child */</span>
+.drop-shadow-example {
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%); <span class="code-comment">/* Triangle */</span>
+  background: royalblue;
+  height: 100%;
+  width: 100%;
+}
+</code></pre>
+      </div>
+    </div>
+  </body>
+</html>
