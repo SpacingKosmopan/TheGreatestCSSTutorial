@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Greatest CSS Tutorial - Grid</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="table_style.css" />
+  </head>
+
+  <body>
+    <button id="backToTop" class="back-to-top" title="Back">↑</button>
+
+    <div id="learning-box">
+      <h1>
+        <button onclick="window.location.href = `./index.html`">◀ home</button
+        >Canvas
+      </h1>
+      <div id="code-info-box">
+        <h2>Getting ready</h2>
+        <p>
+          <code
+            >&lt;canvas id="myCanvas" width="400" height="400" style="border:
+            1px solid black"&gt;&lt;/canvas&gt;
+          </code>
+          - empty canvas<br />
+          <code
+            >const canvas = document.getElementById('myCanvas');<br />
+            const ctx = canvas.getContext('2d');
+          </code>
+          - getting element in JS
+        </p>
+
+        <h2>Basic shapes</h2>
+        <h3>Rectangle</h3>
+        <ul>
+          <li>
+            <code>ctx.fillRect(x, y, width, height)</code> - drawing rectangle
+          </li>
+          <li>
+            <code>ctx.strokeRect(x, y, width, height)</code> - drawing rectangle
+            border
+          </li>
+          <li>
+            <code>ctx.clearRect(x, y, width, height)</code> - rectangle rubber
+          </li>
+        </ul>
+
+        <h3>Lines, triangles</h3>
+        <ul>
+          <li><code>ctx.beginPath()</code> - begin (at the beginning)</li>
+          <li><code>ctx.moveTo(x, y)</code> - moves pencil to location</li>
+          <li>
+            <code>ctx.lineTo(x, y)</code> - draws line from current point to new
+            point
+          </li>
+          <li><code>ctx.closePath()</code> - last point to start point</li>
+        </ul>
+
+        <h3>Circles, arcs</h3>
+        <p>
+          <code>ctx.arc(x, y, radius, startAngle, endAngle);</code><br />Full
+          circle:
+        </p>
+        <pre><code>ctx.beginPath();
+// Middle (200, 200), radius 50, start from 0, ends on full circle
+ctx.arc(200, 200, 50, 0, Math.PI * 2); 
+ctx.fillStyle = 'purple';
+ctx.fill();
+</code></pre>
+
+        <h2>Styling</h2>
+        <ul>
+          <li>
+            <code>ctx.fillStyle = 'red';</code>
+          </li>
+          <li><code>ctx.strokeStyle = 'blue';</code></li>
+          <li><code>ctx.lineWidth = 5;</code></li>
+        </ul>
+
+        <h3>Drawing frames</h3>
+        <p>
+          <code>requestAnimationFrame(funtionName);</code> - the same as
+          <strong>Update() in Unity</strong>
+        </p>
+        <canvas
+          id="loopCanvas"
+          width="400"
+          height="100"
+          style="border: 1px solid black"
+        ></canvas>
+        <pre><code>let x = 0; // Starting pos
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the screen
+    
+    ctx.beginPath();
+    ctx.arc(x, 100, 20, 0, Math.PI * 2); // circle drawing
+    ctx.fillStyle = 'orange';
+    ctx.fill();
+    
+    x += 2; // Position change
+    
+    if (x > canvas.width) x = 0; // Reset
+
+    requestAnimationFrame(animate); // Animation loop
+}
+
+animate(); // Loop startup
+</code></pre>
+
+        <h2>Game Making</h2>
+        <h3>Atlas Preparing</h3>
+        <p>
+          <a
+            href="https://www.codeandweb.com/free-sprite-sheet-packer"
+            target="_blank"
+            >https://www.codeandweb.com/free-sprite-sheet-packer</a
+          ><br />➡ spritesheet.png (sprites combined into one file)<br />➡
+          spritesheet.json (sprites location) <br />.json file:
+        </p>
+        <pre><code>{
+    "frames": {
+        "alice chromatic.png": {
+            "frame": {
+                "x": 1,
+                "y": 1,
+                "w": 511,
+                "h": 1047
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 511,
+                "h": 1047
+            },
+            "sourceSize": {
+                "w": 511,
+                "h": 1047
+            }
+        },</code></pre>
+
+        <h3>Image Loading</h3>
+        <pre><code>const atlas = new Image();
+atlas.src = 'C:/spritesheet.png'; // image path
+
+// wait until image load
+atlas.onload = function() {
+    drawMap();
+};
+</code></pre>
+
+        <h3><code>ctx.drawImage(); </code></h3>
+        <p>
+          <code
+            >ctx.drawImage(img, sx, sy, sWidth, sHeight, dx, dy, dWidth,
+            dHeight);</code
+          ><br />Mnemotechnika:
+          <i>S like Source, D like Destination.</i>
+        </p>
+        <ul>
+          <li><code>img</code>: Image object (atlas).</li>
+          <li>
+            <code>sx, sy</code>: Sprite in atlas position (X and Y in image
+            file).
+          </li>
+          <li><code>sWidth, sHeight</code>: Sprite size in atlas.</li>
+          <li><code>dx, dy</code>: Drawing position (X and Y on screen).</li>
+          <li><code>dWidth, dHeight</code>: Image size on screen (scaling).</li>
+        </ul>
+
+        <h3>Spritesheet data Loading</h3>
+        <pre><code>let atlasData = null;
+let atlasImage = new Image();
+async function initGame(){
+  try {
+    const response = await fetch('./spritesheet.json');
+    atlasData = await response.json();
+
+    atlasImage.src = './' + atlasData.meta.image;
+
+    atlasImage.onload = () => {
+      console.log("Startup...");
+      startGame();
+    };
+  } catch (errors) {
+    console.error("Errors: ", errors)
+  }
+}
+
+initGame();
+        </code></pre>
+
+        <h3>Sprites drawing help function</h3>
+        <pre><code>function drawSprite(spriteName, dX, dY){
+  const sprite = atlasData.frames[spriteName];
+
+  if(!sprite) {
+    console.error(`${spriteName} not found`);
+    return;
+  }
+
+  ctx.drawImage(
+    atlasImage,
+    sprite.frame.x, sprite.frame.y,
+    sprite.frame.w, sprite.frame.h,
+    dX, dY, sprite.frame.w, sprite.frame.h
+  );
+}</code></pre>
+
+        <canvas
+          id="spriteSheetCanvas"
+          width="400"
+          height="100"
+          style="border: 1px solid black"
+        ></canvas>
+
+        <h3>Input Checking</h3>
+        <pre><code>const klawisze = {
+    ArrowUp: false,
+    ArrowDown: false,
+    ArrowLeft: false,
+    ArrowRight: false,
+    w: false,
+    s: false,
+    a: false,
+    d: false
+};
+
+window.addEventListener('keydown', (event) => {
+    if (event.key in klawisze) {
+        klawisze[event.key] = true;
+    }
+});
+
+window.addEventListener('keyup', (event) => {
+    if (event.key in klawisze) {
+        klawisze[event.key] = false;
+    }
+});
+</code></pre>
+      </div>
+    </div>
+    <script>
+      const backToTopBtn = document.getElementById("backToTop");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.add("show");
+        } else {
+          backToTopBtn.classList.remove("show");
+        }
+      });
+
+      backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+
+      //
+
+      const canvas = document.getElementById("loopCanvas");
+      const ctx = canvas.getContext("2d");
+
+      let x = 0;
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.beginPath();
+        ctx.arc(x, 50, 20, 0, Math.PI * 2);
+        ctx.fillStyle = "orange";
+        ctx.fill();
+
+        x += 2;
+
+        if (x > canvas.width) x = 0;
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+
+      //
+
+      const canvas2 = document.getElementById("spriteSheetCanvas");
+      const ctx2 = canvas2.getContext("2d");
+
+      let atlasData = null;
+      let atlasImage = new Image();
+      async function initGame() {
+        try {
+          const response = await fetch("./spritesheet.json");
+          atlasData = await response.json();
+
+          atlasImage.src = "./spritesheet.png";
+
+          atlasImage.onload = () => {
+            console.log("Startup...");
+            startGame();
+          };
+        } catch (errors) {
+          console.error("Errors: ", errors);
+        }
+      }
+
+      initGame();
+
+      function startGame() {
+        console.log("Available sprites: ", atlasData.frames);
+
+        const sprite = atlasData.frames["coils.png"];
+
+        if (!sprite) {
+          console.error(`sprite not found`);
+          return;
+        }
+
+        ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+
+        ctx2.drawImage(
+          atlasImage,
+          sprite.frame.x,
+          sprite.frame.y,
+          sprite.frame.w,
+          sprite.frame.h,
+          100,
+          25,
+          sprite.frame.w,
+          sprite.frame.h,
+        );
+
+        //
+        let forceFieldImage = new Image();
+        forceFieldImage.src = "./force_field.png";
+        const scale = 1.5;
+        const offset = -1;
+
+        forceFieldImage.onload = () => {
+          const oryginalneW = forceFieldImage.width;
+          const oryginalneH = forceFieldImage.height;
+
+          const doceloweW = oryginalneW / scale;
+          const doceloweH = oryginalneH / scale;
+
+          for (let i = 0; i < 5; i++) {
+            ctx2.save();
+
+            const posX = 10;
+            const posY = doceloweH * i + offset * i;
+
+            // 1. Przesunięcie do punktu docelowego
+            ctx2.translate(posX, posY);
+
+            // 2. Obrót o 270 stopni (3 * 90° w radianach)
+            ctx2.rotate((3 * Math.PI) / 2);
+
+            // 3. Rysowanie obrazka
+            // Po obrocie o 270 stopni musimy przesunąć pozycję X o ujemną szerokość,
+            // aby obrazek "wskoczył" na właściwe miejsce docelowe.
+            ctx2.drawImage(
+              forceFieldImage,
+              0,
+              0,
+              oryginalneW,
+              oryginalneH,
+              -doceloweW, // Kompensacja szerokości po obrocie o 270 stopni
+              0,
+              doceloweW,
+              doceloweH,
+            );
+
+            ctx2.restore();
+          }
+        };
+      }
+    </script>
+  </body>
+</html>

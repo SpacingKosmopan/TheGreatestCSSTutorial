@@ -1,0 +1,153 @@
+{
+  "frames": {
+    "hero_cards.png": {
+      "frame": {
+        "x": 1,
+        "y": 1,
+        "w": 151,
+        "h": 180
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 151,
+        "h": 180
+      },
+      "sourceSize": {
+        "w": 151,
+        "h": 180
+      }
+    },
+    "nuts.png": {
+      "frame": {
+        "x": 1,
+        "y": 183,
+        "w": 154,
+        "h": 147
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 154,
+        "h": 147
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 147
+      }
+    },
+    "coins.png": {
+      "frame": {
+        "x": 1,
+        "y": 332,
+        "w": 81,
+        "h": 87
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 81,
+        "h": 87
+      },
+      "sourceSize": {
+        "w": 81,
+        "h": 87
+      }
+    },
+    "gear_common.png": {
+      "frame": {
+        "x": 1,
+        "y": 421,
+        "w": 58,
+        "h": 59
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 58,
+        "h": 59
+      },
+      "sourceSize": {
+        "w": 58,
+        "h": 59
+      }
+    },
+    "gear_personal.png": {
+      "frame": {
+        "x": 61,
+        "y": 421,
+        "w": 58,
+        "h": 59
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 58,
+        "h": 59
+      },
+      "sourceSize": {
+        "w": 58,
+        "h": 59
+      }
+    },
+    "gear_weapon.png": {
+      "frame": {
+        "x": 84,
+        "y": 332,
+        "w": 58,
+        "h": 59
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 58,
+        "h": 59
+      },
+      "sourceSize": {
+        "w": 58,
+        "h": 59
+      }
+    },
+    "coils.png": {
+      "frame": {
+        "x": 121,
+        "y": 393,
+        "w": 47,
+        "h": 59
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 47,
+        "h": 59
+      },
+      "sourceSize": {
+        "w": 47,
+        "h": 59
+      }
+    }
+  },
+  "meta": {
+    "app": "SpriteSheetGen",
+    "format": "RGBA8888",
+    "size": {
+      "w": 256,
+      "h": 512
+    },
+    "scale": 1
+  }
+}

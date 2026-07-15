@@ -272,6 +272,127 @@
   &lt;circle cx="50" cy="50" r="40" class="interactive-ball" /&gt;
   &lt;text x="100" y="55">Hover me!&lt;/text&gt;
 &lt;/svg&gt;</code></pre>
+
+        <h2><code>viewbox</code></h2>
+        <p>
+          Bez viewBox (&lt;svg width="100" height="100"&gt;): Przeglądarka
+          tworzy sztywne okno o wymiarach 100x100 pikseli. Jeśli Twój kształt ma
+          współrzędną X=150, zostanie on bezwzględnie ucięty, bo wystaje poza te
+          100 pikseli.
+        </p>
+        <p>
+          Z viewBox (&lt;svg width="100" height="100" viewBox="0 0 200
+          200"&gt;): Mówisz przeglądarce: "Mój rysunek ma wewnętrzny rozmiar
+          200x200, ale ściśnij go tak, aby zmieścił się w fizycznym oknie
+          100x100". Kształt o współrzędnej X=150 będzie idealnie widoczny
+          (zostanie przeskalowany do 75 pikseli).
+        </p>
+
+        <h2>Styling</h2>
+        <h3>Fill</h3>
+        <pre><code>/* Kontrola wnętrza kształtów */
+selector {
+  fill: #3498db;            /* Kolor wypełnienia (nazwa, HEX, RGB) */
+  fill: url(#id-gradientu); /* Wypełnienie gradientem lub wzorem z &lt;defs&gt; */
+  fill: none;               /* Brak wypełnienia (przezroczyste wnętrze) */
+  fill-opacity: 0.5;        /* Przezroczystość wypełnienia (od 0.0 do 1.0) */
+  fill-rule: nonzero;       /* Reguła wypełniania: domyślna dla skomplikowanych ścieżek */
+  fill-rule: evenodd;       /* Alternatywna reguła wypełniania */
+}
+</code></pre>
+
+        <h4><code>defs</code></h4>
+        <pre><code>&lt;defs&gt;
+  &lt;linearGradient id="my-rgb-gradient" x1="0%" y1="0%" x2="100%" y2="100%"&gt;
+    &lt;stop offset="0%" stop-color="#ff007f" /&gt;
+    &lt;stop offset="100%" stop-color="#00f0ff" /&gt;
+  &lt;/linearGradient&gt;
+&lt;/defs&gt;</code></pre>
+
+        <h3>Stroke (line and border)</h3>
+        <pre><code>/* Kontrola konturów i linii */
+selector {
+  stroke: #e74c3c;          /* Kolor linii (nazwa, HEX, RGB, gradient) */
+  stroke: none;             /* Brak obramowania */
+  stroke-width: 3px;        /* Grubość linii (w pikselach lub bez jednostek) */
+  stroke-opacity: 0.8;      /* Przezroczystość linii (od 0.0 do 1.0) */
+  
+  /* Przerywane linie i animacje */
+  stroke-dasharray: 5, 5;   /* Wzór linii przerywanej: [długość kreski, długość przerwy] */
+  stroke-dasharray: 10, 5, 2, 5; /* Złożony wzór kreskowania */
+  stroke-dashoffset: 45;    /* Przesunięcie wzoru kreski (kluczowe do animacji rysowania) */
+  
+  /* Wykończenie krawędzi */
+  stroke-linecap: butt;     /* Płaskie, ucięte końce linii (domyślne) */
+  stroke-linecap: round;    /* Zaokrąglone końce linii */
+  stroke-linecap: square;   /* Kwadratowe końce linii (wydłużone o grubość konturu) */
+  
+  /* Łączenie linii w rogach */
+  stroke-linejoin: miter;   /* Ostre, spiczaste narożniki (domyślne) */
+  stroke-linejoin: round;   /* Zaokrąglone narożniki */
+  stroke-linejoin: bevel;   /* Ścięte narożniki */
+  stroke-miterlimit: 4;     /* Limit ostrości narożnika miter zanim przejdzie w bevel */
+}
+</code></pre>
+
+        <h3>Text</h3>
+        <pre><code>/* Formatowanie napisów w tagach &lt;text&gt; i &lt;tspan&gt; */
+selector {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  text-decoration: underline;
+  
+  /* Pozycjonowanie i wyrównanie tekstu (specyficzne dla SVG) */
+  text-anchor: start;       /* Wyrównanie do lewej względem punktu X */
+  text-anchor: middle;      /* Wyśrodkowanie tekstu względem punktu X */
+  text-anchor: end;         /* Wyrównanie do prawej względem punktu X */
+  
+  dominant-baseline: auto;            /* Domyślna linia bazowa */
+  dominant-baseline: central;         /* Wyrównanie pionowe do środka geometrycznego */
+  dominant-baseline: mathematical;    /* Wyrównanie do osi matematycznej */
+  
+  writing-mode: horizontal-tb; /* Tekst poziomy */
+  writing-mode: vertical-rl;   /* Tekst pionowy od prawej do lewej */
+}
+</code></pre>
+
+        <h3>Visibility, effects</h3>
+        <pre><code>/* Kontrola renderowania, przezroczystości i filtrów */
+selector {
+  opacity: 0.7;             /* Przezroczystość całego elementu (wypełnienie + linia) */
+  visibility: hidden;       /* Ukrycie elementu (ale zachowuje miejsce w strukturze) */
+  display: none;            /* Całkowite usunięcie elementu z widoku */
+  
+  filter: url(#id-filtra);  /* Nałożenie filtra SVG (np. rozmycia, cienia z sekcji &lt;defs&gt;) */
+  
+  /* Zarządzanie renderowaniem (optymalizacja jakości vs wydajność) */
+  shape-rendering: auto;               /* Domyślny balans przeglądarki */
+  shape-rendering: optimizeSpeed;      /* Wyłącza antyaliasing (ostre krawędzie, szybkie) */
+  shape-rendering: crispEdges;         /* Wymusza ostre krawędzie bez rozmyć (dobre dla linii) */
+  shape-rendering: geometricPrecision; /* Maksymalna jakość wygładzania krawędzi */
+  
+  /* Zarządzanie renderowaniem tekstu */
+  text-rendering: optimizeLegibility;  /* Priorytet dla czytelności tekstu */
+  
+  /* Kolorowanie obiektów wektorowych na podstawie koloru tekstu */
+  color: #ff0000;
+  fill: currentColor;       /* Pobierze kolor z właściwości 'color' (przydatne przy ikonach) */
+}
+</code></pre>
+
+        <h3>Pointer events</h3>
+        <pre><code>/* Kontrola reagowania na kliknięcia i najechania myszką */
+selector {
+  pointer-events: none;         /* Element ignoruje myszkę (kliknięcia przelatują "na wylot") */
+  pointer-events: auto;         /* Domyślne zachowanie */
+  pointer-events: fill;         /* Reaguje tylko na kliknięcie wewnątrz kształtu */
+  pointer-events: stroke;       /* Reaguje tylko na kliknięcie dokładnie w linię */
+  pointer-events: visiblePainted;/* Reaguje na wszystko, co jest widoczne i pokolorowane */
+}
+</code></pre>
       </div>
     </div>
     <script>
